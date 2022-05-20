@@ -22,37 +22,16 @@ var data = [
 ]
 
 var bigimage=document.querySelector(".image");
-// function setSrc(){
 
-//     bigimage.src="https://media-cldnry.s-nbcnews.com/image/upload/t_fit-760w,f_auto,q_auto:best/streams/2013/March/130326/1C6639340-google-logo.jpg"
-// }
-// function changeImage(key){
-//     bigimage.src=data[key-1].previewImage;
-//     console.log("haha")
-// }
-var button1=document.querySelector("#button1");
-var button2=document.querySelector("#button2");
-var button3=document.querySelector("#button3");
-var button4=document.querySelector("#button4");
-var button5=document.querySelector("#button5");
-button1.innerHTML=data[0].title
-button2.innerHTML=data[1].title
-button3.innerHTML=data[2].title
-button4.innerHTML=data[3].title
-button5.innerHTML=data[4].title
+const buttonsContainer = document.getElementById("buttonsContainer");
 
-button1.addEventListener('click',()=>{
-    bigimage.src=data[0].previewImage;
-})
-button2.addEventListener('click',()=>{
-    bigimage.src=data[1].previewImage;
-})
-button3.addEventListener('click',()=>{
-    bigimage.src=data[2].previewImage;
-})
-button4.addEventListener('click',()=>{
-    bigimage.src=data[3].previewImage;
-})
-button5.addEventListener('click',()=>{
-    bigimage.src=data[4].previewImage;
-})
+for (var i = 0; i < data.length; i++) {
+  const button = document.createElement("button");
+  button.innerText = data[i].title;
+  (function(index){
+    button.addEventListener("click", function() {
+      bigimage.src=data[index].previewImage;
+    })
+  })(i)
+  buttonsContainer.appendChild(button);
+}
