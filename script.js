@@ -57,24 +57,34 @@ for (var i = 0; i < data.length; i++) {
                 arr[index] = nam.innerText
             }
         })
-        // document.addEventListener("keydown",function(){
-        //     if(index==ind+1 && count==0){
-        //         bigimage.src=data[index].previewImage;
-        //         nam.innerText = button.innerText;
-        //         ind = index;
-        //         count=1;
-        //     }
-        // })
-        // document.addEventListener("keyup",function(){
-
-        //     if(index==ind-1 && count==0){
-        //         bigimage.src=data[index].previewImage;
-        //         nam.innerText = button.innerText;
-        //         ind = index;
-        //         count=1;
-        //     }
-        // })
+        document.addEventListener("keydown",function(e){
+            if(e.key=="ArrowUp")
+            {
+                if(index==ind-1){
+                    bigimage.src=data[index].previewImage;
+                    nam.innerText = arr[index];
+                    ind = index;
+                }
+            }
+            else if(e.key=="ArrowDown")
+            {
+                if(index==ind+1){
+                    bigimage.src=data[index].previewImage;
+                    nam.innerText = arr[index];
+                }
+            }
+        })
 
     })(i)
     buttonsContainer.appendChild(span);
 }
+
+document.addEventListener("keydown",function(e){
+    if(e.key=="ArrowDown")
+    {
+        if(ind<data.length-1)
+        {
+            ind++;
+        }
+    }
+})
