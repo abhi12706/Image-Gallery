@@ -22,16 +22,46 @@ var data = [
 ]
 
 var bigimage=document.querySelector(".image");
-
+bigimage.src=data[0].previewImage;
+let ind =0;
 const buttonsContainer = document.getElementById("buttonsContainer");
-
+const nam = document.getElementById("name");
+nam.innerText = data[0].title;
 for (var i = 0; i < data.length; i++) {
   const button = document.createElement("button");
   button.innerText = data[i].title;
+  
   (function(index){
     button.addEventListener("click", function() {
       bigimage.src=data[index].previewImage;
+      nam.innerText = button.innerText;
+      ind = index;
     })
+    nam.addEventListener("input", function(){
+        if(index==ind){
+            console.log(nam.innerText)
+            button.innerText = nam.innerText;
+        }
+    })
+    // document.addEventListener("keydown",function(){
+    //     if(index==ind+1 && count==0){
+    //         bigimage.src=data[index].previewImage;
+    //         nam.innerText = button.innerText;
+    //         ind = index;
+    //         count=1;
+    //     }
+    // })
+    // document.addEventListener("keyup",function(){
+        
+    //     if(index==ind-1 && count==0){
+    //         bigimage.src=data[index].previewImage;
+    //         nam.innerText = button.innerText;
+    //         ind = index;
+    //         count=1;
+    //     }
+    // })
+    
   })(i)
   buttonsContainer.appendChild(button);
+  
 }
