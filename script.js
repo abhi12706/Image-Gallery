@@ -21,47 +21,60 @@ var data = [
     }
 ]
 
-var bigimage=document.querySelector(".image");
-bigimage.src=data[0].previewImage;
-let ind =0;
+var arr = new Array(data.length);
+var bigimage = document.querySelector(".image");
+bigimage.src = data[0].previewImage;
+let ind = 0;
 const buttonsContainer = document.getElementById("buttonsContainer");
 const nam = document.getElementById("name");
 nam.innerText = data[0].title;
+
+function start_and_end(str) {
+    if (str.length > 35) {
+        return str.substr(0, 20) + '...' + str.substr(str.length - 10, str.length);
+    }
+    return str;
+}
+
 for (var i = 0; i < data.length; i++) {
-  const button = document.createElement("button");
-  button.innerText = data[i].title;
-  
-  (function(index){
-    button.addEventListener("click", function() {
-      bigimage.src=data[index].previewImage;
-      nam.innerText = button.innerText;
-      ind = index;
-    })
-    nam.addEventListener("input", function(){
-        if(index==ind){
-            console.log(nam.innerText)
-            button.innerText = nam.innerText;
-        }
-    })
-    // document.addEventListener("keydown",function(){
-    //     if(index==ind+1 && count==0){
-    //         bigimage.src=data[index].previewImage;
-    //         nam.innerText = button.innerText;
-    //         ind = index;
-    //         count=1;
-    //     }
-    // })
-    // document.addEventListener("keyup",function(){
-        
-    //     if(index==ind-1 && count==0){
-    //         bigimage.src=data[index].previewImage;
-    //         nam.innerText = button.innerText;
-    //         ind = index;
-    //         count=1;
-    //     }
-    // })
-    
-  })(i)
-  buttonsContainer.appendChild(button);
-  
+    const button = document.createElement("button");
+    const imag = document.createElement("img");
+    const span = document.createElement("span");
+    arr[i] = data[i].title;
+    button.innerText = start_and_end(arr[i]);
+    imag.src = data[i].previewImage;
+    span.appendChild(imag);
+    span.appendChild(button);
+    (function (index) {
+        button.addEventListener("click", function () {
+            bigimage.src = data[index].previewImage;
+            nam.innerText = arr[index];
+            ind = index;
+        })
+        nam.addEventListener("input", function () {
+            if (index == ind) {
+                button.innerText = start_and_end(nam.innerText);
+                arr[index] = nam.innerText
+            }
+        })
+        // document.addEventListener("keydown",function(){
+        //     if(index==ind+1 && count==0){
+        //         bigimage.src=data[index].previewImage;
+        //         nam.innerText = button.innerText;
+        //         ind = index;
+        //         count=1;
+        //     }
+        // })
+        // document.addEventListener("keyup",function(){
+
+        //     if(index==ind-1 && count==0){
+        //         bigimage.src=data[index].previewImage;
+        //         nam.innerText = button.innerText;
+        //         ind = index;
+        //         count=1;
+        //     }
+        // })
+
+    })(i)
+    buttonsContainer.appendChild(span);
 }
